@@ -1,5 +1,89 @@
 [
   {
+    "objectID": "index.html#two-jobs-i-had-in-college",
+    "href": "index.html#two-jobs-i-had-in-college",
+    "title": "",
+    "section": "Two jobs I had in college",
+    "text": "Two jobs I had in college"
+  },
+  {
+    "objectID": "index.html#two-jobs-i-had-in-college-pt.-1",
+    "href": "index.html#two-jobs-i-had-in-college-pt.-1",
+    "title": "",
+    "section": "Two jobs I had in college (pt. 1)",
+    "text": "Two jobs I had in college (pt. 1)"
+  },
+  {
+    "objectID": "index.html#two-jobs-i-had-in-college-pt.-1-1",
+    "href": "index.html#two-jobs-i-had-in-college-pt.-1-1",
+    "title": "",
+    "section": "Two jobs I had in college (pt. 1)",
+    "text": "Two jobs I had in college (pt. 1)"
+  },
+  {
+    "objectID": "index.html#two-jobs-i-had-in-college-pt.-1-2",
+    "href": "index.html#two-jobs-i-had-in-college-pt.-1-2",
+    "title": "",
+    "section": "Two jobs I had in college (pt. 1)",
+    "text": "Two jobs I had in college (pt. 1)"
+  },
+  {
+    "objectID": "index.html#two-jobs-i-had-in-college-pt.-1-3",
+    "href": "index.html#two-jobs-i-had-in-college-pt.-1-3",
+    "title": "",
+    "section": "Two jobs I had in college (pt. 1)",
+    "text": "Two jobs I had in college (pt. 1)"
+  },
+  {
+    "objectID": "index.html#two-jobs-i-had-in-college-pt.-2",
+    "href": "index.html#two-jobs-i-had-in-college-pt.-2",
+    "title": "",
+    "section": "Two jobs I had in college (pt. 2)",
+    "text": "Two jobs I had in college (pt. 2)"
+  },
+  {
+    "objectID": "index.html#two-jobs-i-had-in-college-pt.-2-1",
+    "href": "index.html#two-jobs-i-had-in-college-pt.-2-1",
+    "title": "",
+    "section": "Two jobs I had in college (pt. 2)",
+    "text": "Two jobs I had in college (pt. 2)"
+  },
+  {
+    "objectID": "index.html#two-jobs-i-had-in-college-pt.-2-2",
+    "href": "index.html#two-jobs-i-had-in-college-pt.-2-2",
+    "title": "",
+    "section": "Two jobs I had in college (pt. 2)",
+    "text": "Two jobs I had in college (pt. 2)"
+  },
+  {
+    "objectID": "index.html#two-jobs-i-had-in-college-pt.-2-3",
+    "href": "index.html#two-jobs-i-had-in-college-pt.-2-3",
+    "title": "",
+    "section": "Two jobs I had in college (pt. 2)",
+    "text": "Two jobs I had in college (pt. 2)"
+  },
+  {
+    "objectID": "index.html#outline",
+    "href": "index.html#outline",
+    "title": "",
+    "section": "Outline",
+    "text": "Outline\n\nMotivation"
+  },
+  {
+    "objectID": "index.html#outline-1",
+    "href": "index.html#outline-1",
+    "title": "",
+    "section": "Outline",
+    "text": "Outline\n\nMotivation ✅\n\nLeave time to iterate\nFancy computers are not a given"
+  },
+  {
+    "objectID": "index.html#outline-2",
+    "href": "index.html#outline-2",
+    "title": "",
+    "section": "Outline",
+    "text": "Outline\n\nMotivation ✅\n\nLeave time to iterate\nFancy computers are not a given\n\nApplied example"
+  },
+  {
     "objectID": "index.html#a-predictive-modeling-problem",
     "href": "index.html#a-predictive-modeling-problem",
     "title": "",
@@ -25,11 +109,18 @@
     "href": "index.html#how-did-we-do-it",
     "title": "",
     "section": "How did we do it?",
-    "text": "How did we do it?\nQuickly, some background:"
+    "text": "How did we do it?\n\n\n\n\n4 optimizations, 7 lines of code:\n\n1) Distributing computations\n2) Non-default modeling engine\n3) Submodel trick\n4) Racing"
   },
   {
     "objectID": "index.html#how-did-we-do-it-1",
     "href": "index.html#how-did-we-do-it-1",
+    "title": "",
+    "section": "How did we do it?",
+    "text": "How did we do it?\nQuickly, some background:"
+  },
+  {
+    "objectID": "index.html#how-did-we-do-it-2",
+    "href": "index.html#how-did-we-do-it-2",
     "title": "",
     "section": "How did we do it?",
     "text": "How did we do it?\nHere’s our tuning process visualized similarly:"
@@ -49,6 +140,20 @@
     "text": "Distributing computations\nIn tidymodels, this is one added line of code:\n\n\nplan(multisession, workers = 4)"
   },
   {
+    "objectID": "index.html#distributing-computations-2",
+    "href": "index.html#distributing-computations-2",
+    "title": "",
+    "section": "Distributing computations",
+    "text": "Distributing computations\n\n1) Distributing computations\n2) Non-default modeling engine\n3) Submodel trick\n4) Racing"
+  },
+  {
+    "objectID": "index.html#distributing-computations-3",
+    "href": "index.html#distributing-computations-3",
+    "title": "",
+    "section": "Distributing computations",
+    "text": "Distributing computations\n\n1) Distributing computations\n2) Non-default modeling engine\n3) Submodel trick\n4) Racing"
+  },
+  {
     "objectID": "index.html#non-default-modeling-engine",
     "href": "index.html#non-default-modeling-engine",
     "title": "",
@@ -61,6 +166,20 @@
     "title": "",
     "section": "Non-default modeling engine",
     "text": "Non-default modeling engine\nIn tidymodels, this is one changed line of code. From:\n\nspec &lt;- boost_tree(engine = \"xgboost\")\n\n\nTo:\n\nspec &lt;- boost_tree(engine = \"lightgbm\")"
+  },
+  {
+    "objectID": "index.html#non-default-modeling-engine-2",
+    "href": "index.html#non-default-modeling-engine-2",
+    "title": "",
+    "section": "Non-default modeling engine",
+    "text": "Non-default modeling engine\n\n1) Distributing computations\n2) Non-default modeling engine\n3) Submodel trick\n4) Racing"
+  },
+  {
+    "objectID": "index.html#non-default-modeling-engine-3",
+    "href": "index.html#non-default-modeling-engine-3",
+    "title": "",
+    "section": "Non-default modeling engine",
+    "text": "Non-default modeling engine\n\n1) Distributing computations\n2) Non-default modeling engine\n3) Submodel trick\n4) Racing"
   },
   {
     "objectID": "index.html#submodel-trick",
@@ -77,6 +196,20 @@
     "text": "Submodel trick\nIn tidymodels, this is a few added lines of code:\n\n\nset.seed(1)\nspec_grid &lt;- spec %&gt;%\n  extract_parameter_set_dials() %&gt;% \n  grid_regular(levels = 4)\n\n\nIn some cases, this “just works” with no changes."
   },
   {
+    "objectID": "index.html#submodel-trick-2",
+    "href": "index.html#submodel-trick-2",
+    "title": "",
+    "section": "Submodel trick",
+    "text": "Submodel trick\n\n1) Distributing computations\n2) Non-default modeling engine\n3) Submodel trick\n4) Racing"
+  },
+  {
+    "objectID": "index.html#submodel-trick-3",
+    "href": "index.html#submodel-trick-3",
+    "title": "",
+    "section": "Submodel trick",
+    "text": "Submodel trick\n\n1) Distributing computations\n2) Non-default modeling engine\n3) Submodel trick\n4) Racing"
+  },
+  {
     "objectID": "index.html#racing",
     "href": "index.html#racing",
     "title": "",
@@ -91,11 +224,25 @@
     "text": "Racing\nIn tidymodels, this is one changed line of code. From:\n\nresults &lt;- tune_grid(spec, ...)\n\n\nTo:\n\nresults &lt;- tune_race_anova(spec, ...)"
   },
   {
+    "objectID": "index.html#racing-2",
+    "href": "index.html#racing-2",
+    "title": "",
+    "section": "Racing",
+    "text": "Racing\n\n1) Distributing computations\n2) Non-default modeling engine\n3) Submodel trick\n4) Racing"
+  },
+  {
+    "objectID": "index.html#racing-3",
+    "href": "index.html#racing-3",
+    "title": "",
+    "section": "Racing",
+    "text": "Racing\n\n1) Distributing computations\n2) Non-default modeling engine\n3) Submodel trick\n4) Racing"
+  },
+  {
     "objectID": "index.html#optimizations-altogether",
     "href": "index.html#optimizations-altogether",
     "title": "",
     "section": "Optimizations, altogether",
-    "text": "Optimizations, altogether\nWe went from:\n\nTo:"
+    "text": "Optimizations, altogether\nWe went from 3.68h:\n\nTo 1.52m:"
   },
   {
     "objectID": "index.html#resources",

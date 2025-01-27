@@ -40,6 +40,16 @@ $presentation-heading-color: $charcoal !default;
   color: #a1a1a1;
 }
 
+// Change up the color scheme for H1 slides
+.reveal h1 {
+  color: #ffffff;
+  background-color: #b45c2e;
+}
+
+.reveal .slide.level1 .slide-background-content {
+  background-color: #b45c2e;
+}
+
 // Additional colors for code
 $code-bg: lighten($charcoal, 73%) !default;  // Very light background
 $code-color: $charcoal !default;
@@ -63,37 +73,37 @@ $code-block-bg: lighten($charcoal, 71%) !default;  // Slightly darker than inlin
 
 // Syntax highlighting colors
 .reveal .sourceCode {
-  .fu { 
+  .fu {
     color: $rust;
   }
-  
-  .st { 
+
+  .st {
     color: $forest;
   }
-  
-  .fl, .dv { 
+
+  .fl, .dv {
     color: darken($rust, 10%);
   }
-  
-  .co { 
+
+  .co {
     color: lighten($charcoal, 40%);
     font-style: italic;
   }
-  
-  .va, .at { 
+
+  .va, .at {
     color: darken($forest, 5%);
   }
-  
-  .kw { 
+
+  .kw {
     color: $rust;
     font-weight: 500;
   }
-  
-  .op { 
+
+  .op {
     color: $charcoal;
   }
-  
-  .cn { 
+
+  .cn {
     color: darken($forest, 10%);
   }
 }

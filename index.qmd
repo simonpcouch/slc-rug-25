@@ -16,6 +16,84 @@ knitr:
 
 ------------------------------------------------------------------------
 
+## Two jobs I had in college
+
+## Two jobs I had in college (pt. 1)
+
+```{r}
+#| echo: false
+#| out-width: 100%
+#| fig-align: center
+#| fig-alt: "A stick-figure sketch of me."
+knitr::include_graphics("figures/sketches/mlab-1.png")
+```
+
+## Two jobs I had in college (pt. 1)
+
+```{r}
+#| echo: false
+#| out-width: 100%
+#| fig-align: center
+#| fig-alt: "The same sketch, though with hair."
+knitr::include_graphics("figures/sketches/mlab-2.png")
+```
+
+## Two jobs I had in college (pt. 1)
+
+```{r}
+#| echo: false
+#| out-width: 100%
+#| fig-align: center
+#| fig-alt: "The same sketch, though I'm seated at a table with a person with a laptop in front of them."
+knitr::include_graphics("figures/sketches/mlab-3.png")
+```
+
+## Two jobs I had in college (pt. 1)
+
+```{r}
+#| echo: false
+#| out-width: 100%
+#| fig-align: center
+#| fig-alt: "The same sketch, with the text 'sad about R, not the quality of my help.'"
+knitr::include_graphics("figures/sketches/mlab-4.png")
+```
+
+# Leave time to iterate
+
+## Two jobs I had in college (pt. 2)
+
+## Two jobs I had in college (pt. 2)
+
+```{r}
+#| echo: false
+#| out-width: 100%
+#| fig-align: center
+#| fig-alt: "Back to the sketch of just me."
+knitr::include_graphics("figures/sketches/tm-1.png")
+```
+
+## Two jobs I had in college (pt. 2)
+
+```{r}
+#| echo: false
+#| out-width: 100%
+#| fig-align: center
+#| fig-alt: "Me, seated a table with a laptop in front of me."
+knitr::include_graphics("figures/sketches/tm-2.png")
+```
+
+## Two jobs I had in college (pt. 2)
+
+```{r}
+#| echo: false
+#| out-width: 100%
+#| fig-align: center
+#| fig-alt: "The same sketch, now with the text 'sad about the quality of my laptop, not R.'"
+knitr::include_graphics("figures/sketches/tm-3.png")
+```
+
+# Fancy computers are not a given
+
 ```{r}
 #| label: "load"
 #| include: false
@@ -43,6 +121,25 @@ bt <-
   boost_tree(learn_rate = tune(), trees = tune()) %>%
   set_mode("classification")
 ```
+
+## Outline
+
+* Motivation
+
+## Outline
+
+* Motivation ✅
+     - Leave time to iterate
+     - Fancy computers are not a given
+
+## Outline
+
+* Motivation ✅
+     - Leave time to iterate
+     - Fancy computers are not a given
+* Applied example
+
+# Applied example
 
 ## A predictive modeling problem
 
@@ -88,7 +185,25 @@ auc_speedy <- collect_metrics(fit_speedy) %>%
 
 *Virtually indistinguishable performance in `r round( (bm_speedy$median[1] /bm_basic$median[1]), 3)*100`% of the time.*
 
-------------------------------------------------------------------------
+## How did we do it?
+
+<!-- light: -->
+<!-- <span style="color:#d7ae99;"></span> -->
+
+<!-- dark: -->
+<!-- <span style="color:#b45c2e;"</span> -->
+
+4 optimizations, 7 lines of code:
+
+<br>
+
+<span style="color:#b45c2e;">1) Distributing computations</span>
+
+<span style="color:#b45c2e;">2) Non-default modeling engine</span>
+
+<span style="color:#b45c2e;">3) Submodel trick</span>
+
+<span style="color:#b45c2e;">4) Racing</span>
 
 ## How did we do it?
 
@@ -130,6 +245,30 @@ In tidymodels, this is one added line of code:
 plan(multisession, workers = 4)
 ```
 
+## Distributing computations
+
+<br>
+
+<span style="color:#d7ae99;">1) Distributing computations</span>
+
+<span style="color:#d7ae99;">2) Non-default modeling engine</span>
+
+<span style="color:#d7ae99;">3) Submodel trick</span>
+
+<span style="color:#d7ae99;">4) Racing</span>
+
+## Distributing computations
+
+<br>
+
+<span style="color:#b45c2e;">1) Distributing computations</span>
+
+<span style="color:#d7ae99;">2) Non-default modeling engine</span>
+
+<span style="color:#d7ae99;">3) Submodel trick</span>
+
+<span style="color:#d7ae99;">4) Racing</span>
+
 ## Non-default modeling engine
 
 Before:
@@ -157,6 +296,30 @@ To:
 #| eval: false
 spec <- boost_tree(engine = "lightgbm")
 ```
+
+## Non-default modeling engine
+
+<br>
+
+<span style="color:#b45c2e;">1) Distributing computations</span>
+
+<span style="color:#d7ae99;">2) Non-default modeling engine</span>
+
+<span style="color:#d7ae99;">3) Submodel trick</span>
+
+<span style="color:#d7ae99;">4) Racing</span>
+
+## Non-default modeling engine
+
+<br>
+
+<span style="color:#b45c2e;">1) Distributing computations</span>
+
+<span style="color:#b45c2e;">2) Non-default modeling engine</span>
+
+<span style="color:#d7ae99;">3) Submodel trick</span>
+
+<span style="color:#d7ae99;">4) Racing</span>
 
 ## Submodel trick
 
@@ -188,6 +351,30 @@ In some cases, this "just works" with no changes.
 
 <!-- TODO: explanatory slide, visualizing the two grids -->
 
+## Submodel trick
+
+<br>
+
+<span style="color:#b45c2e;">1) Distributing computations</span>
+
+<span style="color:#b45c2e;">2) Non-default modeling engine</span>
+
+<span style="color:#d7ae99;">3) Submodel trick</span>
+
+<span style="color:#d7ae99;">4) Racing</span>
+
+## Submodel trick
+
+<br>
+
+<span style="color:#b45c2e;">1) Distributing computations</span>
+
+<span style="color:#b45c2e;">2) Non-default modeling engine</span>
+
+<span style="color:#b45c2e;">3) Submodel trick</span>
+
+<span style="color:#d7ae99;">4) Racing</span>
+
 ## Racing
 
 Before:
@@ -216,15 +403,41 @@ To:
 results <- tune_race_anova(spec, ...)
 ```
 
+## Racing
+
+<br>
+
+<span style="color:#b45c2e;">1) Distributing computations</span>
+
+<span style="color:#b45c2e;">2) Non-default modeling engine</span>
+
+<span style="color:#b45c2e;">3) Submodel trick</span>
+
+<span style="color:#d7ae99;">4) Racing</span>
+
+## Racing
+
+<br>
+
+<span style="color:#b45c2e;">1) Distributing computations</span>
+
+<span style="color:#b45c2e;">2) Non-default modeling engine</span>
+
+<span style="color:#b45c2e;">3) Submodel trick</span>
+
+<span style="color:#b45c2e;">4) Racing</span>
+
 ## Optimizations, altogether
 
-We went from:
+We went from `r bench:::format.bench_time(bm_basic$median[1])`:
 
 ![](figures/basic_resample.png){#basic-resample-last}
 
-To:
+To `r bench:::format.bench_time(bm_speedy$median[1])`:
 
 ![](figures/parallel_resample_opt3.png){#parallel_resample_opt3-last}
+
+<!-- leaves time to iterate and doesn't require the fanciest of computers to run -->
 
 ## Resources
 
@@ -248,7 +461,7 @@ To:
 
 ::: {.column width="60%"}
 ```{=html}
-<iframe width="780" height="600" src="https://emlwr.org/" title="Efficient Machine Learning with R"></iframe>
+<iframe width="780" height="500" src="https://emlwr.org/" title="Efficient Machine Learning with R"></iframe>
 ```
 :::
 :::::
