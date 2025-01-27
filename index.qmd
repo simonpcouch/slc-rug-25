@@ -1,0 +1,266 @@
+---
+title: ""
+format: 
+  revealjs:
+    theme: [default, emlwr.scss]
+    footer: '<span style="color:#aa5b31;">github.com/simonpcouch/slc-rug-25</span>'
+editor: source
+knitr:
+  opts_chunk: 
+    echo: true
+    collapse: true
+    comment: "#>"
+---
+
+![](figures/hero.png){fig-alt="Title slide, reading \"Fair machine learning with tidymodels,\" my name, Simon P. Couch, and my affiliation, Posit Software, PBC. To the right of the text are six hexagonal stickers showing packages from the tidymodels."}
+
+------------------------------------------------------------------------
+
+```{r}
+#| label: "load"
+#| include: false
+source("data/setup.R")
+
+bm_basic <- qread("data/bm_basic.rds")
+bm_speedy <- qread("data/bm_speedy.rds")
+fit_basic <- qread("data/fit_basic.rds")
+fit_speedy <- qread("data/fit_speedy.rds")
+```
+
+```{r}
+#| label: "prep-objects"
+#| include: false
+set.seed(1)
+d <- simulate_classification(1e5)
+
+set.seed(1)
+d_split <- initial_split(d)
+d_train <- training(d_split)
+d_test <- testing(d_split)
+d_folds <- vfold_cv(d_train)
+
+bt <- 
+  boost_tree(learn_rate = tune(), trees = tune()) %>%
+  set_mode("classification")
+```
+
+## A predictive modeling problem
+
+::: incremental
+-   Binary outcome ("yes" or "no")
+
+-   100,000 rows, 18 columns
+
+-   Mix of numeric and categorical predictors
+:::
+
+. . .
+
+How long does it take to tune a boosted tree model on my laptop?
+
+------------------------------------------------------------------------
+
+## Two modeling approaches
+
+```{r}
+#| label: calculate-metrics
+#| include: false
+auc_basic <- collect_metrics(fit_basic) %>%
+  filter(.metric == "roc_auc") %>%
+  pull(.estimate)
+
+auc_speedy <- collect_metrics(fit_speedy) %>%
+  filter(.metric == "roc_auc") %>%
+  pull(.estimate)
+```
+
+| Approach | Area under ROC | Elapsed time |
+|------------------------|------------------------|------------------------|
+| Default engine + grid search | `r round(auc_basic, 4)` | `r bench:::format.bench_time(bm_basic$median[1])` |
+| Optimized engine + search strategy |  |  |
+
+## Two modeling approaches
+
+| Approach | Area under ROC | Elapsed time |
+|------------------------|------------------------|------------------------|
+| Default engine + grid search | `r round(auc_basic, 4)` | `r bench:::format.bench_time(bm_basic$median[1])` |
+| Optimized engine + search strategy | `r round(auc_speedy, 4)` | `r bench:::format.bench_time(bm_speedy$median[1])` |
+
+*Virtually indistinguishable performance in `r round( (bm_speedy$median[1] /bm_basic$median[1]), 3)*100`% of the time.*
+
+------------------------------------------------------------------------
+
+## How did we do it?
+
+Quickly, some background:
+
+```{r}
+#| label: "translate-diagram"
+#| echo: false
+#| fig-align: "center"
+knitr::include_graphics("figures/translate_diagram.png") 
+```
+
+## How did we do it?
+
+Here's our tuning process visualized similarly:
+
+![](figures/basic_resample.png){#basic-resample-1}
+
+## Distributing computations
+
+Sequentially:
+
+![](figures/basic_resample.png){#basic-resample-2}
+
+. . .
+
+In parallel:
+
+![](figures/parallel_resample.png){#parallel-resample}
+
+## Distributing computations
+
+In tidymodels, this is one added line of code:
+
+<br>
+
+```{r}
+#| eval: false
+plan(multisession, workers = 4)
+```
+
+## Non-default modeling engine
+
+Before:
+
+![](figures/parallel_resample.png){#parallel_resample-2}
+
+With a carefully chosen modeling engine:
+
+![](figures/parallel_resample_opt.png){#parallel_resample_opt-1}
+
+## Non-default modeling engine
+
+In tidymodels, this is one changed line of code. From:
+
+```{r}
+#| eval: false
+spec <- boost_tree(engine = "xgboost")
+```
+
+<br>
+
+To:
+
+```{r}
+#| eval: false
+spec <- boost_tree(engine = "lightgbm")
+```
+
+## Submodel trick
+
+Before:
+
+![](figures/parallel_resample_opt.png){#parallel_resample_opt-2}
+
+Fitting a third as many models:
+
+![](figures/parallel_resample_opt2.png){#parallel_resample_opt2-1}
+
+## Submodel trick
+
+In tidymodels, this is a few added lines of code:
+
+<br>
+
+```{r}
+#| eval: false
+set.seed(1)
+spec_grid <- spec %>%
+  extract_parameter_set_dials() %>% 
+  grid_regular(levels = 4)
+```
+
+<br>
+
+In some cases, this "just works" with no changes.
+
+<!-- TODO: explanatory slide, visualizing the two grids -->
+
+## Racing
+
+Before:
+
+![](figures/parallel_resample_opt2.png){#parallel-resample-opt2-2}
+
+Giving up on poorly performing models early:
+
+![](figures/parallel_resample_opt3.png){#parallel_resample_opt3-1}
+
+## Racing
+
+In tidymodels, this is one changed line of code. From:
+
+```{r}
+#| eval: false
+results <- tune_grid(spec, ...)
+```
+
+<br>
+
+To:
+
+```{r}
+#| eval: false
+results <- tune_race_anova(spec, ...)
+```
+
+## Optimizations, altogether
+
+We went from:
+
+![](figures/basic_resample.png){#basic-resample-last}
+
+To:
+
+![](figures/parallel_resample_opt3.png){#parallel_resample_opt3-last}
+
+## Resources
+
+::::: columns
+::: {.column width="40%"}
+-   [tmwr.org]{style="color:#c46938;"}
+:::
+
+::: {.column width="60%"}
+![](https://www.tmwr.org/images/cover.png){height="550" fig-alt="The book cover for \"Tidy Modeling with R.\"" style="box-shadow: 5px 5px 10px gray;"}
+:::
+:::::
+
+## Resources
+
+::::: columns
+::: {.column width="40%"}
+-   [tmwr.org]{style="color:#c46938;"}
+-   [emlwr.org]{style="color:#c46938;"}
+:::
+
+::: {.column width="60%"}
+```{=html}
+<iframe width="780" height="600" src="https://emlwr.org/" title="Efficient Machine Learning with R"></iframe>
+```
+:::
+:::::
+
+## Resources
+
+-   [tmwr.org]{style="color:#c46938;"}
+-   [emlwr.org]{style="color:#c46938;"}
+-   Slides and resources:
+
+<span style="font-size:130%">
+
+<center>[github.com/simonpcouch/slc-rug-25]{style="color:#c46938;"}</center>
+
+</span>

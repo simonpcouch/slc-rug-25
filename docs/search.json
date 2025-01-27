@@ -1,0 +1,121 @@
+[
+  {
+    "objectID": "index.html#a-predictive-modeling-problem",
+    "href": "index.html#a-predictive-modeling-problem",
+    "title": "",
+    "section": "A predictive modeling problem",
+    "text": "A predictive modeling problem\n\n\nBinary outcome (“yes” or “no”)\n100,000 rows, 18 columns\nMix of numeric and categorical predictors\n\n\n\nHow long does it take to tune a boosted tree model on my laptop?"
+  },
+  {
+    "objectID": "index.html#two-modeling-approaches",
+    "href": "index.html#two-modeling-approaches",
+    "title": "",
+    "section": "Two modeling approaches",
+    "text": "Two modeling approaches\n\n\n\n\n\n\n\n\nApproach\nArea under ROC\nElapsed time\n\n\n\n\nDefault engine + grid search\n0.8957\n3.68h\n\n\nOptimized engine + search strategy"
+  },
+  {
+    "objectID": "index.html#two-modeling-approaches-1",
+    "href": "index.html#two-modeling-approaches-1",
+    "title": "",
+    "section": "Two modeling approaches",
+    "text": "Two modeling approaches\n\n\n\n\n\n\n\n\nApproach\nArea under ROC\nElapsed time\n\n\n\n\nDefault engine + grid search\n0.8957\n3.68h\n\n\nOptimized engine + search strategy\n0.8954\n1.52m\n\n\n\nVirtually indistinguishable performance in 0.7% of the time."
+  },
+  {
+    "objectID": "index.html#how-did-we-do-it",
+    "href": "index.html#how-did-we-do-it",
+    "title": "",
+    "section": "How did we do it?",
+    "text": "How did we do it?\nQuickly, some background:"
+  },
+  {
+    "objectID": "index.html#how-did-we-do-it-1",
+    "href": "index.html#how-did-we-do-it-1",
+    "title": "",
+    "section": "How did we do it?",
+    "text": "How did we do it?\nHere’s our tuning process visualized similarly:"
+  },
+  {
+    "objectID": "index.html#distributing-computations",
+    "href": "index.html#distributing-computations",
+    "title": "",
+    "section": "Distributing computations",
+    "text": "Distributing computations\nSequentially:\n\n\nIn parallel:"
+  },
+  {
+    "objectID": "index.html#distributing-computations-1",
+    "href": "index.html#distributing-computations-1",
+    "title": "",
+    "section": "Distributing computations",
+    "text": "Distributing computations\nIn tidymodels, this is one added line of code:\n\n\nplan(multisession, workers = 4)"
+  },
+  {
+    "objectID": "index.html#non-default-modeling-engine",
+    "href": "index.html#non-default-modeling-engine",
+    "title": "",
+    "section": "Non-default modeling engine",
+    "text": "Non-default modeling engine\nBefore:\n\nWith a carefully chosen modeling engine:"
+  },
+  {
+    "objectID": "index.html#non-default-modeling-engine-1",
+    "href": "index.html#non-default-modeling-engine-1",
+    "title": "",
+    "section": "Non-default modeling engine",
+    "text": "Non-default modeling engine\nIn tidymodels, this is one changed line of code. From:\n\nspec &lt;- boost_tree(engine = \"xgboost\")\n\n\nTo:\n\nspec &lt;- boost_tree(engine = \"lightgbm\")"
+  },
+  {
+    "objectID": "index.html#submodel-trick",
+    "href": "index.html#submodel-trick",
+    "title": "",
+    "section": "Submodel trick",
+    "text": "Submodel trick\nBefore:\n\nFitting a third as many models:"
+  },
+  {
+    "objectID": "index.html#submodel-trick-1",
+    "href": "index.html#submodel-trick-1",
+    "title": "",
+    "section": "Submodel trick",
+    "text": "Submodel trick\nIn tidymodels, this is a few added lines of code:\n\n\nset.seed(1)\nspec_grid &lt;- spec %&gt;%\n  extract_parameter_set_dials() %&gt;% \n  grid_regular(levels = 4)\n\n\nIn some cases, this “just works” with no changes."
+  },
+  {
+    "objectID": "index.html#racing",
+    "href": "index.html#racing",
+    "title": "",
+    "section": "Racing",
+    "text": "Racing\nBefore:\n\nGiving up on poorly performing models early:"
+  },
+  {
+    "objectID": "index.html#racing-1",
+    "href": "index.html#racing-1",
+    "title": "",
+    "section": "Racing",
+    "text": "Racing\nIn tidymodels, this is one changed line of code. From:\n\nresults &lt;- tune_grid(spec, ...)\n\n\nTo:\n\nresults &lt;- tune_race_anova(spec, ...)"
+  },
+  {
+    "objectID": "index.html#optimizations-altogether",
+    "href": "index.html#optimizations-altogether",
+    "title": "",
+    "section": "Optimizations, altogether",
+    "text": "Optimizations, altogether\nWe went from:\n\nTo:"
+  },
+  {
+    "objectID": "index.html#resources",
+    "href": "index.html#resources",
+    "title": "",
+    "section": "Resources",
+    "text": "Resources\n\n\n\ntmwr.org"
+  },
+  {
+    "objectID": "index.html#resources-1",
+    "href": "index.html#resources-1",
+    "title": "",
+    "section": "Resources",
+    "text": "Resources\n\n\n\ntmwr.org\nemlwr.org"
+  },
+  {
+    "objectID": "index.html#resources-2",
+    "href": "index.html#resources-2",
+    "title": "",
+    "section": "Resources",
+    "text": "Resources\n\ntmwr.org\nemlwr.org\nSlides and resources:\n\n\n\ngithub.com/simonpcouch/slc-rug-25"
+  }
+]
