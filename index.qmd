@@ -58,7 +58,7 @@ knitr::include_graphics("figures/sketches/mlab-3.png")
 knitr::include_graphics("figures/sketches/mlab-4.png")
 ```
 
-# Leave time to iterate
+# Progress is made when the R session is idle
 
 ## Two jobs I had in college (pt. 2)
 
@@ -129,13 +129,13 @@ bt <-
 ## Outline
 
 * Motivation ✅
-     - Leave time to iterate
+     - Progress is made when the R session is idle
      - Fancy computers are not a given
 
 ## Outline
 
 * Motivation ✅
-     - Leave time to iterate
+     - Progress is made when the R session is idle
      - Fancy computers are not a given
 * Applied example
 
